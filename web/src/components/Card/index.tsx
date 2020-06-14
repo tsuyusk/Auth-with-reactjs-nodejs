@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card as RCard, CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
+import { CardHeader, CardBody, CardTitle, CardText } from "reactstrap";
+import { RCard } from "./styles";
 
 interface IProps {
   title: string;
