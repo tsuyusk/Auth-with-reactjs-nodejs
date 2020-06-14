@@ -15,6 +15,6 @@ export const Form = styled.form`
 `;
 
 export const CardDeck = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
 `;
