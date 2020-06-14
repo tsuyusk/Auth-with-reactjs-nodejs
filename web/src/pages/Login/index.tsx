@@ -3,15 +3,12 @@ import Message from './Message';
 import Form from './Form';
 import { Container } from './styles';
 
-interface IProps {
-  handleAuth(): void;
-}
 
-const Login: React.FC<IProps> = ({ handleAuth }) => {
+const Login: React.FC = () => {
   return (
     <Container>
       <Message />
-      <Form handleAuth={handleAuth} />
+      <Form />
     </Container>
   )
 }

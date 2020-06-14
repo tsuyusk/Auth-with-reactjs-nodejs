@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FiLock, FiUser, FiChevronDown } from "react-icons/fi";
 import { InputGroup, InputGroupAddon, InputGroupText, Spinner } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 
 import api from "../../../services/api";
+import { AuthContext } from "../../../context/AuthContext";
 import { Container, Input, Button } from './styles';
 
 interface IData {
@@ -17,15 +18,12 @@ interface IResponse {
   token: string;
 }
 
-interface IProps {
-  handleAuth(): void;
-}
-
-const Form: React.FC<IProps> = ({ handleAuth }) => {
+const Form: React.FC = () => {
   const [data, setData] = useState<IData>({username: "", password: ""});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const authContext = useContext(AuthContext);
   const history = useHistory();
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -41,7 +39,7 @@ const Form: React.FC<IProps> = ({ handleAuth }) => {
       const { has } = res.data;
       
       if (has) {
-        handleAuth();
+        authContext.auth();
         setLoading(false);
         history.push("/homepage");
       }

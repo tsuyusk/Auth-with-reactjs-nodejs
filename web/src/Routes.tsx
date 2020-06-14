@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Switch , Route, Redirect } from "react-router-dom";
 
+import { AuthContext } from "./context/AuthContext";
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Homepage from './pages/Homepage';
@@ -17,7 +19,9 @@ const Routes: React.FC = () => {
           <Redirect to="/login" />
         </Route>
         <Route path="/login">
-          <Login handleAuth={handleAuth} />
+          <AuthContext.Provider value={{auth: handleAuth}}>
+            <Login />
+          </AuthContext.Provider>
         </Route>
         <Route path="/register">
           <Register />
