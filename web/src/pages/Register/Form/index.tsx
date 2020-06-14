@@ -23,6 +23,7 @@ const Form: React.FC<RouteProps> = ({ location }) => {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     try {
       event.preventDefault(); 
+      setError(false);
       setLoading(true);
       setSucess(false);
       const { username, password } = data;

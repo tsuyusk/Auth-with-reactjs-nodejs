@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, /*useContext*/ } from 'react';
 import { FiLock, FiUser, FiChevronDown } from "react-icons/fi";
 import { InputGroup, InputGroupAddon, InputGroupText, Spinner } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link /*useHistory*/ } from "react-router-dom";
 
 import api from "../../../services/api";
-import { AuthContext } from "../../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import { Container, Input, Button } from './styles';
 
 interface IData {
@@ -23,8 +23,8 @@ const Form: React.FC = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const authContext = useContext(AuthContext);
-  const history = useHistory();
+  const { signIn } = useAuth();
+  //const history = useHistory();
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setData({...data, [event.target?.name]: event.target?.value});
@@ -39,9 +39,9 @@ const Form: React.FC = () => {
       const { has } = res.data;
       
       if (has) {
-        authContext.auth();
+        signIn();
         setLoading(false);
-        history.push("/homepage");
+        /*history.push("/");*/
       }
     } catch {
       setLoading(false);

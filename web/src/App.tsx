@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 
-import Routes from './Routes';
+import { AuthProvider } from "./context/AuthContext";
+import Routes from './routes';
 import { GlobalStyle } from './styles/GlobalStyle';
 
 const App: React.FC = () => {
@@ -14,9 +15,11 @@ const App: React.FC = () => {
   return (
     <>
       <GlobalStyle />
-      <Router>
-        <Routes />
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Routes />
+        </Router>
+      </AuthProvider>
     </>
   )
 }

@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Input, Button } from "reactstrap";
-import { useHistory } from "react-router-dom";
 
 import { Container, Content, Form, CardDeck } from "./styles";
 import Card from '../../components/Card';
+import { useAuth } from '../../context/AuthContext';
 
 interface ICardData {
   title: string;
@@ -11,9 +11,9 @@ interface ICardData {
 }
 
 const Homepage: React.FC = () => {
+  const { signOff } = useAuth();
   const [cardData, setCardData] = useState<ICardData>({title: "", description: ""})
   const [cards, setCards] = useState<ICardData[]>([]);
-  const history = useHistory();
 
   function handleAddCard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,8 +23,7 @@ const Homepage: React.FC = () => {
     }
   }
   function handleSignOff() {
-    localStorage.removeItem("token");
-    history.goBack();
+    signOff();
   }
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setCardData({...cardData, [event.target.name]: event.target.value});
